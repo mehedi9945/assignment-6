@@ -36,7 +36,11 @@ function App() {
       toast.info(`${product.name} is already in your cart.`, { autoClose: 2000 })
       return
     }
-    setCartItems(prev => [...prev, product])
+    const productWithIcon = {
+      ...product,
+      icon: iconMap[product.iconKey],
+    }
+    setCartItems(prev => [...prev, productWithIcon])
     toast.success(`${product.name} added to cart!`, { autoClose: 2000 })
   }
 
@@ -211,7 +215,7 @@ function App() {
                     <div key={item.id} className="flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-4">
                         <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-violet-50">
-                          {item.icon}
+                          <img src={item.icon} alt={item.name} className="h-10 w-10 object-contain" />
                         </div>
                         <div>
                           <h4 className="text-lg font-semibold text-slate-950">{item.name}</h4>
